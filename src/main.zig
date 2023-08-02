@@ -517,6 +517,8 @@ test parseString {
         \\}
     );
     defer doc.deinit();
+
+    try std.testing.expectEqualStrings("egg-zon", doc.root.object.get("name").?.string);
 }
 
 test "parse root null" {
