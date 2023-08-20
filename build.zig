@@ -10,6 +10,14 @@ pub fn build(b: *std.Build) void {
     const ptk_dep = b.dependency("parser-toolkit", .{});
     const ptk_mod = ptk_dep.module("parser-toolkit");
 
+    _ = b.addModule("eggzon", .{
+        .source_file = .{ .path = "src/main.zig" },
+        .dependencies = &.{.{
+            .name = "parser-toolkit",
+            .module = ptk_mod,
+        }},
+    });
+
     const main_tests = b.addTest(.{
         .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
